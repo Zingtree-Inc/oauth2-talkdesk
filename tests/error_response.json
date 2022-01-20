@@ -1,0 +1,16 @@
+{
+  "details": {
+    "value": [
+      {
+        "type": "blank",
+        "description": "can't be blank"
+      },
+      {
+        "type": "invalid",
+        "description": " is not properly formatted"
+      }
+    ]
+  },
+  "description": "RecordValidation errors",
+  "error": "RecordInvalid"
+}
