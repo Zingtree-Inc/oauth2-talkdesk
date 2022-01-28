@@ -50,7 +50,7 @@ class Talkdesk extends AbstractProvider
      */
     public function getBaseAuthorizationUrl()
     {
-        return $this->getAuthDomain() . '/oauth/token';
+        return $this->getAuthDomain() . '/oauth/authorize';
     }
 
     /**
@@ -160,5 +160,18 @@ class Talkdesk extends AbstractProvider
     private function getAuthDomain()
     {
         return 'https://' . $this->subdomain . $this->domain;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getHeaders($token = null)
+    {
+        if (!$token) {
+            $auth = base64_encode("{$this->clientId}:{$this->clientSecret}");
+            $headers["Authorization"] = "Basic $auth";
+            return array_merge(parent::getHeaders($token), $headers);
+        }
+        return parent::getHeaders($token);
     }
 }
